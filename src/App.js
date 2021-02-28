@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import ReactSlider from 'react-slider';
 import './App.css';
 
 function App() {
+  const [km,setKm] = useState(50)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <div className="label">
+          Looking for: {km}
+          </div>
+        <div className="slider">
+          <ReactSlider
+              className="horizontal-slider"
+              thumbClassName="example-thumb"
+              trackClassName="example-track"
+              defaultValue={km}
+              onBeforeChange={val => console.log('onBeforeChange value:', val)}
+              onChange={val => {
+                console.log('onChange value:', val)
+                setKm(val)
+              }}
+              onAfterChange={val => console.log('onAfterChange value:', val)}
+              renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          />
+        </div>
     </div>
   );
 }
